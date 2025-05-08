@@ -9,8 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#2091F9",
+        'background-button': '#359E96',
       },
+      fontFamily: {
+        cascadia: ['"Cascadia Code"', 'monospace']
+      }
     },
   },
   plugins: [],

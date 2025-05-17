@@ -9,9 +9,11 @@ export function Input(props: Text) {
             placeholder={props.text}
             className="
                 w-full
-                h-13
+                2xl:h-13
+                2xl:px-3
+                2xl:py-4
+                h-9
                 px-3
-                py-4
                 text-[1em]
                 xl:text-[.9em]
                 border-2 border-[var(--form-bg)]
@@ -29,6 +31,6 @@ export function Input(props: Text) {
 
 export function Button(props: Text) {
     return (
-        <button className="w-full h-13 bg-[var(--form-bg)] rounded-md text-[var(--background))] font-sans font-bold first-letter:uppercase hover:bg-[#1f605a] transition-bg duration-800">{props.text}</button>
+        <button className="w-full h-9 2xl:h-13 bg-[var(--form-bg)] rounded-md text-[var(--background))] font-sans font-bold first-letter:uppercase hover:bg-[#1f605a] transition-bg duration-800">{props.text}</button>
     )
 }

@@ -14,8 +14,8 @@ export default function Login() {
             <div>
                 <TitleForm>Login</TitleForm>
                 <FormLayout>
-                    <Input text="E-mail ou usuário" />
-                    <Input text="Senha" />
+                    <Input text="E-mail ou usuário" type="text"/>
+                    <Input text="Senha" type="password"/>
                     <Button text="acessar" />
                 </FormLayout>
                 <p className="text-center p-2">Ainda não possui conta? <Link href={'/cadastrar'} className="text-[var(--form-bg)] font-bold cursor-pointer underline">Cadastre-se</Link></p>

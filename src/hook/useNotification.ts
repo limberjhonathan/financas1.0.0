@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 type NotificationState = {
   message: string;
-  success: boolean;
 } | null;
 
 export function useNotification(state: NotificationState, duration = 3000) {

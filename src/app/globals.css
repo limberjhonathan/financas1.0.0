@@ -2,9 +2,36 @@
 
 @theme {
    --cor-primaria: #359E96;
+   --cor-error: #FF4D4D;
    --background: #1A1D1C;
    --form-bg: #359E96
 }
+
+@keyframes mymove {
+  0% {
+    top: -20px;
+    opacity: 0;
+  }
+  20% {
+    top: 10px;
+    opacity: 1;
+  }
+  80% {
+    top: 10px;
+    opacity: 1;
+  }
+  100% {
+    top: -20px;
+    opacity: 0;
+  }
+}
+
+.animate-mymove {
+  animation: mymove 3s ease-in-out forwards;
+  position: absolute;
+}
+
+
 
 /* :root {
   --background: #ffffff;

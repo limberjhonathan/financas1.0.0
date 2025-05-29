@@ -10,7 +10,15 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // Importa as regras padrão do Next.js + TypeScript
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // Adiciona suas regras personalizadas aqui
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off", // Desativa a regra de 'any' para permitir uso explícito
+    },
+  },
 ];
 
 export default eslintConfig;

@@ -13,7 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.log(credentials);
 
         const user = await findUserByCredentials(credentials.email as string, credentials.password as string);
-
+      
         return user
       },
     })

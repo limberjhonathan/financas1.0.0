@@ -1,5 +1,5 @@
-import { Hero } from "@/templates/hero";
-import { generatePageMetadata } from "@/utils/page-title";
+import { Hero } from "../templates/hero";
+import { generatePageMetadata } from "../utils/page-title";
 
 export const metadata = generatePageMetadata("Home", "Home page")
 

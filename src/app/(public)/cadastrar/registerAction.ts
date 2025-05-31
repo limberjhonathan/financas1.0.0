@@ -1,8 +1,10 @@
 'use server'
 
-import db from "@/lib/db";
-// import { hashSync } from "bcrypt-ts";
-import validator from 'validator';
+import { validateRegisterInput } from "@/src/lib/validators/validateRegister";
+import { createUser, findUserByEmail } from "@/src/models/findUserByEmail";
+import { hashSync } from "bcryptjs";
+import { redirect } from "next/navigation";
+
 
 export default async function registerAction(
   _prevState: unknown,
@@ -15,59 +17,18 @@ export default async function registerAction(
     name: string;
   };
 
-  const allFieldsFilled = data.name && data.email && data.password && data.repeatPassword;
-  const isEmailValid = validator.isEmail(data.email);
-  const arePasswordsLongEnough = data.password.length >= 6 && data.repeatPassword.length >= 6;
-  const passwordsMatch = data.password === data.repeatPassword;
-  const userExists = await db.user.findUnique({ where: { email: data.email } });
+  const userExists = await findUserByEmail(data.email);
 
-  const validations = [
-    {
-      valid: allFieldsFilled,
-      message: "Campos obrigatórios não preenchidos",
-      typeError: "all",
-    },
-    {
-      valid: isEmailValid,
-      message: "E-mail inválido",
-      typeError: "notEmail",
-    },
-    {
-      valid: !userExists,
-      message: "Usuário já cadastrado",
-      typeError: "userExists",
-    },
-    {
-      valid: arePasswordsLongEnough,
-      message: "A senha deve ter no mínimo 6 caracteres",
-      typeError: "shortPassword",
-    },
-    {
-      valid: passwordsMatch,
-      message: "As senhas não coincidem",
-      typeError: "passwordsDontMatch",
-    },
-  ];
-
-  for (const { valid, message, typeError } of validations) {
-    if (!valid) {
-      return { message, error: false, typeError };
-    }
+  const validationError = validateRegisterInput(data, !!userExists);
+  if (validationError) {
+    return validationError;
   }
 
-  // Criação do usuário no banco (descomente quando for usar)
-  // await db.user.create({
-  //   data: {
-  //     email: data.email,
-  //     password: hashSync(data.password),
-  //     username: data.name,
-  //     createdAt: new Date(),
-  //   },
-  // });
+  await createUser({
+    email: data.email,
+    password: hashSync(data.password),
+    username: data.name,
+  });
 
-  return {
-    message: "Usuário cadastrado com sucesso",
-    error: true,
-    typeError: "createdSuccess",
-  };
+  return redirect("/login");
 }

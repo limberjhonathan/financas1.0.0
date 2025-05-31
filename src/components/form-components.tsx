@@ -38,7 +38,6 @@ export function Input(props: InputText) {
                     rounded-md
                     font-sans
                     font-bold
-                    leading-[3rem]
                     focus:outline-none
                     transition-shadow duration-700
                     ${props.error

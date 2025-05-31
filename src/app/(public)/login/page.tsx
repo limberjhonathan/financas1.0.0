@@ -4,17 +4,10 @@ import { LayoutBackForm } from "@/src/templates/layoutBack-form"
 import { generatePageMetadata } from "@/src/utils/page-title"
 import Link from "next/link"
 import LoginForm from "./login-form"
-// import { auth } from "@/auth"
-// import { redirect } from "next/navigation"
 
 export const metadata = generatePageMetadata("Login", "Login page")
 
 export default async function Login() {
-    // const session = await auth()
-
-    // if (session) {
-    //     redirect('/dashboard')
-    // }
 
     return (
         <LayoutBackForm>

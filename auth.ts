@@ -10,12 +10,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {}
       },
       authorize: async (credentials) => {
-        console.log(credentials);
+        // console.log(credentials);
 
         const user = await findUserByCredentials(credentials.email as string, credentials.password as string);
-      
         return user
       },
     })
   ],
+  // session:{
+  //   strategy: "jwt",
+  //   maxAge: 60 * 60 * 24 * 2,
+  // }
 })

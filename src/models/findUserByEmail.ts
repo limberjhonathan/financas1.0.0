@@ -1,7 +1,6 @@
 import db from "../lib/db";
 import { compareSync } from "bcryptjs";
 
-
 export async function findUserByEmail(email: string) {
   return await db.user.findUnique({ where: { email } });
 }
@@ -25,6 +24,7 @@ type User = {
   email: string;
   password?: string;
   name?: string;
+  isConfirmed: boolean;
 }
 
 export async function findUserByCredentials(
@@ -36,15 +36,15 @@ export async function findUserByCredentials(
       email: email,
     },
   });
-
+  
   if (!user) {
     return null;
   }
 
   const passwordMatch = compareSync(password, user.password);
 
-  if(passwordMatch) {
-    return {email: user.email, name: user.username};
+  if (passwordMatch) {
+    return { email: user.email, name: user.username, isConfirmed: user.isConfirmed };
   }
 
   return null;

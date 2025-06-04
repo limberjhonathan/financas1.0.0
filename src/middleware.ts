@@ -2,24 +2,36 @@ import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
 export default auth((req) => {
+  const url = new URL(req.url);
+  const { pathname } = url;
+
+  // 🔒 BLOQUEAR ACESSO À /verificar SEM O COOKIE
+  if (pathname === "/verificar") {
+    const emailCookie = req.cookies.get("email_not_confirmed");
+
+    // Se não tiver o cookie, redireciona para login
+    if (!emailCookie) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+  }
+
+  // ✅ USUÁRIO AUTENTICADO
   if (req.auth) {
-    // Se autenticado, pode acessar dashboard, mas bloqueia login/register
-    const url = new URL(req.url);
-    if (url.pathname === "/login" || url.pathname === "/cadastrar") {
+    if (pathname === "/login" || pathname === "/cadastrar") {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
     return NextResponse.next();
   }
 
-  // Se não autenticado, pode acessar login/register, mas bloqueia dashboard/admin
-  const url = new URL(req.url);
-  if (url.pathname.startsWith("/dashboard") || url.pathname.startsWith("/admin")) {
+  // 🚫 USUÁRIO NÃO AUTENTICADO
+  if (pathname.startsWith("/dashboard") || pathname.startsWith("/admin")) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
   return NextResponse.next();
 });
 
+// 👉 Adicione /verificar ao matcher
 export const config = {
-  matcher: ["/login", "/cadastrar", "/dashboard/:path*", "/admin/:path*"],
+  matcher: ["/login", "/cadastrar", "/verificar", "/dashboard/:path*", "/admin/:path*"],
 };

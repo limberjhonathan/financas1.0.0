@@ -19,7 +19,7 @@ export async function sendVerificationEmail(to: string, code: string){
     html: `<p>Seu código de verificação é: <strong>${code}</strong></p>`,
   });
 
-  const failed = info.response
+  const email = info.response
 
-  console.log("Email =========================", failed);
+  console.log("Email: ", email);
 }

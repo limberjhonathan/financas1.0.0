@@ -1,6 +1,6 @@
 import NextAuth, { CredentialsSignin } from "next-auth"
 import Credentials from "next-auth/providers/credentials";
-import { findUserByCredentials } from "./src/models/findUserByEmail";
+import { findUserByCredentials } from "./src/services/userServices";
 
 class UserNotConfirmedError extends CredentialsSignin {
   code = "UserNotConfirmed"

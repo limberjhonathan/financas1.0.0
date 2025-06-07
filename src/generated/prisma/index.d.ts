@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type user = $Result.DefaultSelection<Prisma.$userPayload>
+/**
+ * Model confirmationCode
+ * 
+ */
+export type confirmationCode = $Result.DefaultSelection<Prisma.$confirmationCodePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.userDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.confirmationCode`: Exposes CRUD operations for the **confirmationCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConfirmationCodes
+    * const confirmationCodes = await prisma.confirmationCode.findMany()
+    * ```
+    */
+  get confirmationCode(): Prisma.confirmationCodeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    user: 'user'
+    user: 'user',
+    confirmationCode: 'confirmationCode'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "confirmationCode"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -679,6 +695,72 @@ export namespace Prisma {
           count: {
             args: Prisma.userCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      confirmationCode: {
+        payload: Prisma.$confirmationCodePayload<ExtArgs>
+        fields: Prisma.confirmationCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.confirmationCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.confirmationCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload>
+          }
+          findFirst: {
+            args: Prisma.confirmationCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.confirmationCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload>
+          }
+          findMany: {
+            args: Prisma.confirmationCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload>[]
+          }
+          create: {
+            args: Prisma.confirmationCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload>
+          }
+          createMany: {
+            args: Prisma.confirmationCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.confirmationCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload>
+          }
+          update: {
+            args: Prisma.confirmationCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.confirmationCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.confirmationCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.confirmationCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$confirmationCodePayload>
+          }
+          aggregate: {
+            args: Prisma.ConfirmationCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConfirmationCode>
+          }
+          groupBy: {
+            args: Prisma.confirmationCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConfirmationCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.confirmationCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<ConfirmationCodeCountAggregateOutputType> | number
           }
         }
       }
@@ -767,6 +849,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: userOmit
+    confirmationCode?: confirmationCodeOmit
   }
 
   /* Types for Logging */
@@ -886,6 +969,7 @@ export namespace Prisma {
     username: string | null
     email: string | null
     password: string | null
+    isConfirmed: boolean | null
     createdAt: Date | null
   }
 
@@ -894,6 +978,7 @@ export namespace Prisma {
     username: string | null
     email: string | null
     password: string | null
+    isConfirmed: boolean | null
     createdAt: Date | null
   }
 
@@ -902,6 +987,7 @@ export namespace Prisma {
     username: number
     email: number
     password: number
+    isConfirmed: number
     createdAt: number
     _all: number
   }
@@ -920,6 +1006,7 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
+    isConfirmed?: true
     createdAt?: true
   }
 
@@ -928,6 +1015,7 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
+    isConfirmed?: true
     createdAt?: true
   }
 
@@ -936,6 +1024,7 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
+    isConfirmed?: true
     createdAt?: true
     _all?: true
   }
@@ -1031,6 +1120,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    isConfirmed: boolean
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -1058,7 +1148,9 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
+    isConfirmed?: boolean
     createdAt?: boolean
+    confirmationCode?: boolean | user$confirmationCodeArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
 
@@ -1068,19 +1160,26 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
+    isConfirmed?: boolean
     createdAt?: boolean
   }
 
-  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "isConfirmed" | "createdAt", ExtArgs["result"]["user"]>
+  export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    confirmationCode?: boolean | user$confirmationCodeArgs<ExtArgs>
+  }
 
   export type $userPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "user"
-    objects: {}
+    objects: {
+      confirmationCode: Prisma.$confirmationCodePayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       username: string
       email: string
       password: string
+      isConfirmed: boolean
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1422,6 +1521,7 @@ export namespace Prisma {
    */
   export interface Prisma__userClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    confirmationCode<T extends user$confirmationCodeArgs<ExtArgs> = {}>(args?: Subset<T, user$confirmationCodeArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1455,6 +1555,7 @@ export namespace Prisma {
     readonly username: FieldRef<"user", 'String'>
     readonly email: FieldRef<"user", 'String'>
     readonly password: FieldRef<"user", 'String'>
+    readonly isConfirmed: FieldRef<"user", 'Boolean'>
     readonly createdAt: FieldRef<"user", 'DateTime'>
   }
     
@@ -1472,6 +1573,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
     /**
      * Filter, which user to fetch.
      */
@@ -1491,6 +1596,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter, which user to fetch.
      */
     where: userWhereUniqueInput
@@ -1508,6 +1617,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
     /**
      * Filter, which user to fetch.
      */
@@ -1557,6 +1670,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter, which user to fetch.
      */
     where?: userWhereInput
@@ -1605,6 +1722,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter, which users to fetch.
      */
     where?: userWhereInput
@@ -1648,6 +1769,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * The data needed to create a user.
      */
     data: XOR<userCreateInput, userUncheckedCreateInput>
@@ -1676,6 +1801,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
     /**
      * The data needed to update a user.
      */
@@ -1717,6 +1846,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * The filter to search for the user to update in case it exists.
      */
     where: userWhereUniqueInput
@@ -1743,6 +1876,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter which user to delete.
      */
     where: userWhereUniqueInput
@@ -1763,6 +1900,25 @@ export namespace Prisma {
   }
 
   /**
+   * user.confirmationCode
+   */
+  export type user$confirmationCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    where?: confirmationCodeWhereInput
+  }
+
+  /**
    * user without action
    */
   export type userDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1774,6 +1930,977 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model confirmationCode
+   */
+
+  export type AggregateConfirmationCode = {
+    _count: ConfirmationCodeCountAggregateOutputType | null
+    _avg: ConfirmationCodeAvgAggregateOutputType | null
+    _sum: ConfirmationCodeSumAggregateOutputType | null
+    _min: ConfirmationCodeMinAggregateOutputType | null
+    _max: ConfirmationCodeMaxAggregateOutputType | null
+  }
+
+  export type ConfirmationCodeAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+  }
+
+  export type ConfirmationCodeSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+  }
+
+  export type ConfirmationCodeMinAggregateOutputType = {
+    id: number | null
+    code: string | null
+    userId: number | null
+    createdAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type ConfirmationCodeMaxAggregateOutputType = {
+    id: number | null
+    code: string | null
+    userId: number | null
+    createdAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type ConfirmationCodeCountAggregateOutputType = {
+    id: number
+    code: number
+    userId: number
+    createdAt: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type ConfirmationCodeAvgAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type ConfirmationCodeSumAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type ConfirmationCodeMinAggregateInputType = {
+    id?: true
+    code?: true
+    userId?: true
+    createdAt?: true
+    expiresAt?: true
+  }
+
+  export type ConfirmationCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    userId?: true
+    createdAt?: true
+    expiresAt?: true
+  }
+
+  export type ConfirmationCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    userId?: true
+    createdAt?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type ConfirmationCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which confirmationCode to aggregate.
+     */
+    where?: confirmationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of confirmationCodes to fetch.
+     */
+    orderBy?: confirmationCodeOrderByWithRelationInput | confirmationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: confirmationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` confirmationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` confirmationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned confirmationCodes
+    **/
+    _count?: true | ConfirmationCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConfirmationCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConfirmationCodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConfirmationCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConfirmationCodeMaxAggregateInputType
+  }
+
+  export type GetConfirmationCodeAggregateType<T extends ConfirmationCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateConfirmationCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConfirmationCode[P]>
+      : GetScalarType<T[P], AggregateConfirmationCode[P]>
+  }
+
+
+
+
+  export type confirmationCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: confirmationCodeWhereInput
+    orderBy?: confirmationCodeOrderByWithAggregationInput | confirmationCodeOrderByWithAggregationInput[]
+    by: ConfirmationCodeScalarFieldEnum[] | ConfirmationCodeScalarFieldEnum
+    having?: confirmationCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConfirmationCodeCountAggregateInputType | true
+    _avg?: ConfirmationCodeAvgAggregateInputType
+    _sum?: ConfirmationCodeSumAggregateInputType
+    _min?: ConfirmationCodeMinAggregateInputType
+    _max?: ConfirmationCodeMaxAggregateInputType
+  }
+
+  export type ConfirmationCodeGroupByOutputType = {
+    id: number
+    code: string
+    userId: number
+    createdAt: Date
+    expiresAt: Date
+    _count: ConfirmationCodeCountAggregateOutputType | null
+    _avg: ConfirmationCodeAvgAggregateOutputType | null
+    _sum: ConfirmationCodeSumAggregateOutputType | null
+    _min: ConfirmationCodeMinAggregateOutputType | null
+    _max: ConfirmationCodeMaxAggregateOutputType | null
+  }
+
+  type GetConfirmationCodeGroupByPayload<T extends confirmationCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConfirmationCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConfirmationCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConfirmationCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], ConfirmationCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type confirmationCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["confirmationCode"]>
+
+
+
+  export type confirmationCodeSelectScalar = {
+    id?: boolean
+    code?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+  }
+
+  export type confirmationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "userId" | "createdAt" | "expiresAt", ExtArgs["result"]["confirmationCode"]>
+  export type confirmationCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+
+  export type $confirmationCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "confirmationCode"
+    objects: {
+      user: Prisma.$userPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      code: string
+      userId: number
+      createdAt: Date
+      expiresAt: Date
+    }, ExtArgs["result"]["confirmationCode"]>
+    composites: {}
+  }
+
+  type confirmationCodeGetPayload<S extends boolean | null | undefined | confirmationCodeDefaultArgs> = $Result.GetResult<Prisma.$confirmationCodePayload, S>
+
+  type confirmationCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<confirmationCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConfirmationCodeCountAggregateInputType | true
+    }
+
+  export interface confirmationCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['confirmationCode'], meta: { name: 'confirmationCode' } }
+    /**
+     * Find zero or one ConfirmationCode that matches the filter.
+     * @param {confirmationCodeFindUniqueArgs} args - Arguments to find a ConfirmationCode
+     * @example
+     * // Get one ConfirmationCode
+     * const confirmationCode = await prisma.confirmationCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends confirmationCodeFindUniqueArgs>(args: SelectSubset<T, confirmationCodeFindUniqueArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConfirmationCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {confirmationCodeFindUniqueOrThrowArgs} args - Arguments to find a ConfirmationCode
+     * @example
+     * // Get one ConfirmationCode
+     * const confirmationCode = await prisma.confirmationCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends confirmationCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, confirmationCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConfirmationCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {confirmationCodeFindFirstArgs} args - Arguments to find a ConfirmationCode
+     * @example
+     * // Get one ConfirmationCode
+     * const confirmationCode = await prisma.confirmationCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends confirmationCodeFindFirstArgs>(args?: SelectSubset<T, confirmationCodeFindFirstArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConfirmationCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {confirmationCodeFindFirstOrThrowArgs} args - Arguments to find a ConfirmationCode
+     * @example
+     * // Get one ConfirmationCode
+     * const confirmationCode = await prisma.confirmationCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends confirmationCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, confirmationCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConfirmationCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {confirmationCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConfirmationCodes
+     * const confirmationCodes = await prisma.confirmationCode.findMany()
+     * 
+     * // Get first 10 ConfirmationCodes
+     * const confirmationCodes = await prisma.confirmationCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const confirmationCodeWithIdOnly = await prisma.confirmationCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends confirmationCodeFindManyArgs>(args?: SelectSubset<T, confirmationCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConfirmationCode.
+     * @param {confirmationCodeCreateArgs} args - Arguments to create a ConfirmationCode.
+     * @example
+     * // Create one ConfirmationCode
+     * const ConfirmationCode = await prisma.confirmationCode.create({
+     *   data: {
+     *     // ... data to create a ConfirmationCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends confirmationCodeCreateArgs>(args: SelectSubset<T, confirmationCodeCreateArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConfirmationCodes.
+     * @param {confirmationCodeCreateManyArgs} args - Arguments to create many ConfirmationCodes.
+     * @example
+     * // Create many ConfirmationCodes
+     * const confirmationCode = await prisma.confirmationCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends confirmationCodeCreateManyArgs>(args?: SelectSubset<T, confirmationCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ConfirmationCode.
+     * @param {confirmationCodeDeleteArgs} args - Arguments to delete one ConfirmationCode.
+     * @example
+     * // Delete one ConfirmationCode
+     * const ConfirmationCode = await prisma.confirmationCode.delete({
+     *   where: {
+     *     // ... filter to delete one ConfirmationCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends confirmationCodeDeleteArgs>(args: SelectSubset<T, confirmationCodeDeleteArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConfirmationCode.
+     * @param {confirmationCodeUpdateArgs} args - Arguments to update one ConfirmationCode.
+     * @example
+     * // Update one ConfirmationCode
+     * const confirmationCode = await prisma.confirmationCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends confirmationCodeUpdateArgs>(args: SelectSubset<T, confirmationCodeUpdateArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConfirmationCodes.
+     * @param {confirmationCodeDeleteManyArgs} args - Arguments to filter ConfirmationCodes to delete.
+     * @example
+     * // Delete a few ConfirmationCodes
+     * const { count } = await prisma.confirmationCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends confirmationCodeDeleteManyArgs>(args?: SelectSubset<T, confirmationCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConfirmationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {confirmationCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConfirmationCodes
+     * const confirmationCode = await prisma.confirmationCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends confirmationCodeUpdateManyArgs>(args: SelectSubset<T, confirmationCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ConfirmationCode.
+     * @param {confirmationCodeUpsertArgs} args - Arguments to update or create a ConfirmationCode.
+     * @example
+     * // Update or create a ConfirmationCode
+     * const confirmationCode = await prisma.confirmationCode.upsert({
+     *   create: {
+     *     // ... data to create a ConfirmationCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConfirmationCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends confirmationCodeUpsertArgs>(args: SelectSubset<T, confirmationCodeUpsertArgs<ExtArgs>>): Prisma__confirmationCodeClient<$Result.GetResult<Prisma.$confirmationCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConfirmationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {confirmationCodeCountArgs} args - Arguments to filter ConfirmationCodes to count.
+     * @example
+     * // Count the number of ConfirmationCodes
+     * const count = await prisma.confirmationCode.count({
+     *   where: {
+     *     // ... the filter for the ConfirmationCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends confirmationCodeCountArgs>(
+      args?: Subset<T, confirmationCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConfirmationCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConfirmationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmationCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConfirmationCodeAggregateArgs>(args: Subset<T, ConfirmationCodeAggregateArgs>): Prisma.PrismaPromise<GetConfirmationCodeAggregateType<T>>
+
+    /**
+     * Group by ConfirmationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {confirmationCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends confirmationCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: confirmationCodeGroupByArgs['orderBy'] }
+        : { orderBy?: confirmationCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, confirmationCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConfirmationCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the confirmationCode model
+   */
+  readonly fields: confirmationCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for confirmationCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__confirmationCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the confirmationCode model
+   */
+  interface confirmationCodeFieldRefs {
+    readonly id: FieldRef<"confirmationCode", 'Int'>
+    readonly code: FieldRef<"confirmationCode", 'String'>
+    readonly userId: FieldRef<"confirmationCode", 'Int'>
+    readonly createdAt: FieldRef<"confirmationCode", 'DateTime'>
+    readonly expiresAt: FieldRef<"confirmationCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * confirmationCode findUnique
+   */
+  export type confirmationCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which confirmationCode to fetch.
+     */
+    where: confirmationCodeWhereUniqueInput
+  }
+
+  /**
+   * confirmationCode findUniqueOrThrow
+   */
+  export type confirmationCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which confirmationCode to fetch.
+     */
+    where: confirmationCodeWhereUniqueInput
+  }
+
+  /**
+   * confirmationCode findFirst
+   */
+  export type confirmationCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which confirmationCode to fetch.
+     */
+    where?: confirmationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of confirmationCodes to fetch.
+     */
+    orderBy?: confirmationCodeOrderByWithRelationInput | confirmationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for confirmationCodes.
+     */
+    cursor?: confirmationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` confirmationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` confirmationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of confirmationCodes.
+     */
+    distinct?: ConfirmationCodeScalarFieldEnum | ConfirmationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * confirmationCode findFirstOrThrow
+   */
+  export type confirmationCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which confirmationCode to fetch.
+     */
+    where?: confirmationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of confirmationCodes to fetch.
+     */
+    orderBy?: confirmationCodeOrderByWithRelationInput | confirmationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for confirmationCodes.
+     */
+    cursor?: confirmationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` confirmationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` confirmationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of confirmationCodes.
+     */
+    distinct?: ConfirmationCodeScalarFieldEnum | ConfirmationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * confirmationCode findMany
+   */
+  export type confirmationCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which confirmationCodes to fetch.
+     */
+    where?: confirmationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of confirmationCodes to fetch.
+     */
+    orderBy?: confirmationCodeOrderByWithRelationInput | confirmationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing confirmationCodes.
+     */
+    cursor?: confirmationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` confirmationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` confirmationCodes.
+     */
+    skip?: number
+    distinct?: ConfirmationCodeScalarFieldEnum | ConfirmationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * confirmationCode create
+   */
+  export type confirmationCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a confirmationCode.
+     */
+    data: XOR<confirmationCodeCreateInput, confirmationCodeUncheckedCreateInput>
+  }
+
+  /**
+   * confirmationCode createMany
+   */
+  export type confirmationCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many confirmationCodes.
+     */
+    data: confirmationCodeCreateManyInput | confirmationCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * confirmationCode update
+   */
+  export type confirmationCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a confirmationCode.
+     */
+    data: XOR<confirmationCodeUpdateInput, confirmationCodeUncheckedUpdateInput>
+    /**
+     * Choose, which confirmationCode to update.
+     */
+    where: confirmationCodeWhereUniqueInput
+  }
+
+  /**
+   * confirmationCode updateMany
+   */
+  export type confirmationCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update confirmationCodes.
+     */
+    data: XOR<confirmationCodeUpdateManyMutationInput, confirmationCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which confirmationCodes to update
+     */
+    where?: confirmationCodeWhereInput
+    /**
+     * Limit how many confirmationCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * confirmationCode upsert
+   */
+  export type confirmationCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the confirmationCode to update in case it exists.
+     */
+    where: confirmationCodeWhereUniqueInput
+    /**
+     * In case the confirmationCode found by the `where` argument doesn't exist, create a new confirmationCode with this data.
+     */
+    create: XOR<confirmationCodeCreateInput, confirmationCodeUncheckedCreateInput>
+    /**
+     * In case the confirmationCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<confirmationCodeUpdateInput, confirmationCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * confirmationCode delete
+   */
+  export type confirmationCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
+    /**
+     * Filter which confirmationCode to delete.
+     */
+    where: confirmationCodeWhereUniqueInput
+  }
+
+  /**
+   * confirmationCode deleteMany
+   */
+  export type confirmationCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which confirmationCodes to delete
+     */
+    where?: confirmationCodeWhereInput
+    /**
+     * Limit how many confirmationCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * confirmationCode without action
+   */
+  export type confirmationCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the confirmationCode
+     */
+    select?: confirmationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the confirmationCode
+     */
+    omit?: confirmationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: confirmationCodeInclude<ExtArgs> | null
   }
 
 
@@ -1796,10 +2923,22 @@ export namespace Prisma {
     username: 'username',
     email: 'email',
     password: 'password',
+    isConfirmed: 'isConfirmed',
     createdAt: 'createdAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const ConfirmationCodeScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type ConfirmationCodeScalarFieldEnum = (typeof ConfirmationCodeScalarFieldEnum)[keyof typeof ConfirmationCodeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1819,6 +2958,13 @@ export namespace Prisma {
   export type userOrderByRelevanceFieldEnum = (typeof userOrderByRelevanceFieldEnum)[keyof typeof userOrderByRelevanceFieldEnum]
 
 
+  export const confirmationCodeOrderByRelevanceFieldEnum: {
+    code: 'code'
+  };
+
+  export type confirmationCodeOrderByRelevanceFieldEnum = (typeof confirmationCodeOrderByRelevanceFieldEnum)[keyof typeof confirmationCodeOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -1835,6 +2981,13 @@ export namespace Prisma {
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1863,7 +3016,9 @@ export namespace Prisma {
     username?: StringFilter<"user"> | string
     email?: StringFilter<"user"> | string
     password?: StringFilter<"user"> | string
+    isConfirmed?: BoolFilter<"user"> | boolean
     createdAt?: DateTimeFilter<"user"> | Date | string
+    confirmationCode?: XOR<ConfirmationCodeNullableScalarRelationFilter, confirmationCodeWhereInput> | null
   }
 
   export type userOrderByWithRelationInput = {
@@ -1871,7 +3026,9 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    isConfirmed?: SortOrder
     createdAt?: SortOrder
+    confirmationCode?: confirmationCodeOrderByWithRelationInput
     _relevance?: userOrderByRelevanceInput
   }
 
@@ -1883,7 +3040,9 @@ export namespace Prisma {
     NOT?: userWhereInput | userWhereInput[]
     username?: StringFilter<"user"> | string
     password?: StringFilter<"user"> | string
+    isConfirmed?: BoolFilter<"user"> | boolean
     createdAt?: DateTimeFilter<"user"> | Date | string
+    confirmationCode?: XOR<ConfirmationCodeNullableScalarRelationFilter, confirmationCodeWhereInput> | null
   }, "id" | "email">
 
   export type userOrderByWithAggregationInput = {
@@ -1891,6 +3050,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    isConfirmed?: SortOrder
     createdAt?: SortOrder
     _count?: userCountOrderByAggregateInput
     _avg?: userAvgOrderByAggregateInput
@@ -1907,14 +3067,75 @@ export namespace Prisma {
     username?: StringWithAggregatesFilter<"user"> | string
     email?: StringWithAggregatesFilter<"user"> | string
     password?: StringWithAggregatesFilter<"user"> | string
+    isConfirmed?: BoolWithAggregatesFilter<"user"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"user"> | Date | string
+  }
+
+  export type confirmationCodeWhereInput = {
+    AND?: confirmationCodeWhereInput | confirmationCodeWhereInput[]
+    OR?: confirmationCodeWhereInput[]
+    NOT?: confirmationCodeWhereInput | confirmationCodeWhereInput[]
+    id?: IntFilter<"confirmationCode"> | number
+    code?: StringFilter<"confirmationCode"> | string
+    userId?: IntFilter<"confirmationCode"> | number
+    createdAt?: DateTimeFilter<"confirmationCode"> | Date | string
+    expiresAt?: DateTimeFilter<"confirmationCode"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }
+
+  export type confirmationCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+    user?: userOrderByWithRelationInput
+    _relevance?: confirmationCodeOrderByRelevanceInput
+  }
+
+  export type confirmationCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId?: number
+    AND?: confirmationCodeWhereInput | confirmationCodeWhereInput[]
+    OR?: confirmationCodeWhereInput[]
+    NOT?: confirmationCodeWhereInput | confirmationCodeWhereInput[]
+    code?: StringFilter<"confirmationCode"> | string
+    createdAt?: DateTimeFilter<"confirmationCode"> | Date | string
+    expiresAt?: DateTimeFilter<"confirmationCode"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }, "id" | "userId">
+
+  export type confirmationCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+    _count?: confirmationCodeCountOrderByAggregateInput
+    _avg?: confirmationCodeAvgOrderByAggregateInput
+    _max?: confirmationCodeMaxOrderByAggregateInput
+    _min?: confirmationCodeMinOrderByAggregateInput
+    _sum?: confirmationCodeSumOrderByAggregateInput
+  }
+
+  export type confirmationCodeScalarWhereWithAggregatesInput = {
+    AND?: confirmationCodeScalarWhereWithAggregatesInput | confirmationCodeScalarWhereWithAggregatesInput[]
+    OR?: confirmationCodeScalarWhereWithAggregatesInput[]
+    NOT?: confirmationCodeScalarWhereWithAggregatesInput | confirmationCodeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"confirmationCode"> | number
+    code?: StringWithAggregatesFilter<"confirmationCode"> | string
+    userId?: IntWithAggregatesFilter<"confirmationCode"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"confirmationCode"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"confirmationCode"> | Date | string
   }
 
   export type userCreateInput = {
     username: string
     email: string
     password: string
+    isConfirmed?: boolean
     createdAt?: Date | string
+    confirmationCode?: confirmationCodeCreateNestedOneWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
@@ -1922,14 +3143,18 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    isConfirmed?: boolean
     createdAt?: Date | string
+    confirmationCode?: confirmationCodeUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type userUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    isConfirmed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confirmationCode?: confirmationCodeUpdateOneWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
@@ -1937,7 +3162,9 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    isConfirmed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    confirmationCode?: confirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
@@ -1945,6 +3172,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    isConfirmed?: boolean
     createdAt?: Date | string
   }
 
@@ -1952,6 +3180,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    isConfirmed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -1960,7 +3189,60 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    isConfirmed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type confirmationCodeCreateInput = {
+    code: string
+    createdAt?: Date | string
+    expiresAt: Date | string
+    user: userCreateNestedOneWithoutConfirmationCodeInput
+  }
+
+  export type confirmationCodeUncheckedCreateInput = {
+    id?: number
+    code: string
+    userId: number
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type confirmationCodeUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: userUpdateOneRequiredWithoutConfirmationCodeNestedInput
+  }
+
+  export type confirmationCodeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type confirmationCodeCreateManyInput = {
+    id?: number
+    code: string
+    userId: number
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type confirmationCodeUpdateManyMutationInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type confirmationCodeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -1989,6 +3271,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -1998,6 +3285,11 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ConfirmationCodeNullableScalarRelationFilter = {
+    is?: confirmationCodeWhereInput | null
+    isNot?: confirmationCodeWhereInput | null
   }
 
   export type userOrderByRelevanceInput = {
@@ -2011,6 +3303,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    isConfirmed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -2023,6 +3316,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    isConfirmed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -2031,6 +3325,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    isConfirmed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -2072,6 +3367,14 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -2086,12 +3389,83 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type UserScalarRelationFilter = {
+    is?: userWhereInput
+    isNot?: userWhereInput
+  }
+
+  export type confirmationCodeOrderByRelevanceInput = {
+    fields: confirmationCodeOrderByRelevanceFieldEnum | confirmationCodeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type confirmationCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type confirmationCodeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type confirmationCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type confirmationCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type confirmationCodeSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type confirmationCodeCreateNestedOneWithoutUserInput = {
+    create?: XOR<confirmationCodeCreateWithoutUserInput, confirmationCodeUncheckedCreateWithoutUserInput>
+    connectOrCreate?: confirmationCodeCreateOrConnectWithoutUserInput
+    connect?: confirmationCodeWhereUniqueInput
+  }
+
+  export type confirmationCodeUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<confirmationCodeCreateWithoutUserInput, confirmationCodeUncheckedCreateWithoutUserInput>
+    connectOrCreate?: confirmationCodeCreateOrConnectWithoutUserInput
+    connect?: confirmationCodeWhereUniqueInput
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type confirmationCodeUpdateOneWithoutUserNestedInput = {
+    create?: XOR<confirmationCodeCreateWithoutUserInput, confirmationCodeUncheckedCreateWithoutUserInput>
+    connectOrCreate?: confirmationCodeCreateOrConnectWithoutUserInput
+    upsert?: confirmationCodeUpsertWithoutUserInput
+    disconnect?: confirmationCodeWhereInput | boolean
+    delete?: confirmationCodeWhereInput | boolean
+    connect?: confirmationCodeWhereUniqueInput
+    update?: XOR<XOR<confirmationCodeUpdateToOneWithWhereWithoutUserInput, confirmationCodeUpdateWithoutUserInput>, confirmationCodeUncheckedUpdateWithoutUserInput>
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2100,6 +3474,30 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type confirmationCodeUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<confirmationCodeCreateWithoutUserInput, confirmationCodeUncheckedCreateWithoutUserInput>
+    connectOrCreate?: confirmationCodeCreateOrConnectWithoutUserInput
+    upsert?: confirmationCodeUpsertWithoutUserInput
+    disconnect?: confirmationCodeWhereInput | boolean
+    delete?: confirmationCodeWhereInput | boolean
+    connect?: confirmationCodeWhereUniqueInput
+    update?: XOR<XOR<confirmationCodeUpdateToOneWithWhereWithoutUserInput, confirmationCodeUpdateWithoutUserInput>, confirmationCodeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type userCreateNestedOneWithoutConfirmationCodeInput = {
+    create?: XOR<userCreateWithoutConfirmationCodeInput, userUncheckedCreateWithoutConfirmationCodeInput>
+    connectOrCreate?: userCreateOrConnectWithoutConfirmationCodeInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type userUpdateOneRequiredWithoutConfirmationCodeNestedInput = {
+    create?: XOR<userCreateWithoutConfirmationCodeInput, userUncheckedCreateWithoutConfirmationCodeInput>
+    connectOrCreate?: userCreateOrConnectWithoutConfirmationCodeInput
+    upsert?: userUpsertWithoutConfirmationCodeInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutConfirmationCodeInput, userUpdateWithoutConfirmationCodeInput>, userUncheckedUpdateWithoutConfirmationCodeInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -2126,6 +3524,11 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2184,6 +3587,14 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -2196,6 +3607,98 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type confirmationCodeCreateWithoutUserInput = {
+    code: string
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type confirmationCodeUncheckedCreateWithoutUserInput = {
+    id?: number
+    code: string
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type confirmationCodeCreateOrConnectWithoutUserInput = {
+    where: confirmationCodeWhereUniqueInput
+    create: XOR<confirmationCodeCreateWithoutUserInput, confirmationCodeUncheckedCreateWithoutUserInput>
+  }
+
+  export type confirmationCodeUpsertWithoutUserInput = {
+    update: XOR<confirmationCodeUpdateWithoutUserInput, confirmationCodeUncheckedUpdateWithoutUserInput>
+    create: XOR<confirmationCodeCreateWithoutUserInput, confirmationCodeUncheckedCreateWithoutUserInput>
+    where?: confirmationCodeWhereInput
+  }
+
+  export type confirmationCodeUpdateToOneWithWhereWithoutUserInput = {
+    where?: confirmationCodeWhereInput
+    data: XOR<confirmationCodeUpdateWithoutUserInput, confirmationCodeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type confirmationCodeUpdateWithoutUserInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type confirmationCodeUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type userCreateWithoutConfirmationCodeInput = {
+    username: string
+    email: string
+    password: string
+    isConfirmed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type userUncheckedCreateWithoutConfirmationCodeInput = {
+    id?: number
+    username: string
+    email: string
+    password: string
+    isConfirmed?: boolean
+    createdAt?: Date | string
+  }
+
+  export type userCreateOrConnectWithoutConfirmationCodeInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutConfirmationCodeInput, userUncheckedCreateWithoutConfirmationCodeInput>
+  }
+
+  export type userUpsertWithoutConfirmationCodeInput = {
+    update: XOR<userUpdateWithoutConfirmationCodeInput, userUncheckedUpdateWithoutConfirmationCodeInput>
+    create: XOR<userCreateWithoutConfirmationCodeInput, userUncheckedCreateWithoutConfirmationCodeInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutConfirmationCodeInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutConfirmationCodeInput, userUncheckedUpdateWithoutConfirmationCodeInput>
+  }
+
+  export type userUpdateWithoutConfirmationCodeInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    isConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type userUncheckedUpdateWithoutConfirmationCodeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    isConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

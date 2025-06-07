@@ -125,7 +125,16 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
+  isConfirmed: 'isConfirmed',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.ConfirmationCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -139,9 +148,14 @@ exports.Prisma.userOrderByRelevanceFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.confirmationCodeOrderByRelevanceFieldEnum = {
+  code: 'code'
+};
+
 
 exports.Prisma.ModelName = {
-  user: 'user'
+  user: 'user',
+  confirmationCode: 'confirmationCode'
 };
 
 /**

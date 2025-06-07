@@ -17,6 +17,5 @@ export default async function Login() {
                 <p className="text-center p-2">Ainda não possui conta? <Link href={'/cadastrar'} className="text-[var(--form-bg)] font-bold cursor-pointer underline">Cadastre-se</Link></p>
             </div>
         </LayoutBackForm>
-
     )
 }

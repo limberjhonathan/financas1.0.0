@@ -7,7 +7,7 @@ import LoginForm from "./login-form"
 
 export const metadata = generatePageMetadata("Login", "Login page")
 
-export default async function Login() {
+export default function Login() {
 
     return (
         <LayoutBackForm>

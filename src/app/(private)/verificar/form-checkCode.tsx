@@ -5,12 +5,17 @@ import { checkCodeAction } from "./actions";
 import { useCooldown } from "@/src/hook/useCooldown";
 import TokenWatcher from "@/src/components/tokenWatcher";
 
-export default function CheckCodeForm({ email }: { email: string }) {
+type Props = {
+  email: string;
+  exp: number;
+};
+
+export default function CheckCodeForm({ email, exp }: Props) {
   const { disabled, secondsLeft, startCooldown } = useCooldown(() => checkCodeAction(email));
 
   return (
     <section className="p-8 max-w-md mx-auto font-sans">
-      <TokenWatcher/>
+      <TokenWatcher exp={exp}/>
       <p className="mb-4">
         Avise-nos se esse email pertence a você. Insira o código enviado para: <strong>{email}</strong>
       </p>

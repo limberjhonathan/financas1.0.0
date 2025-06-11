@@ -1,12 +1,14 @@
 "use client"
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { useState } from 'react'
+import { buttonClass } from '../utils/style/buttonStyle';
 
 export interface InputText {
     text?: string;
     type?: string;
     name?: string;
     error?: boolean;
+    baseClass?: string;
 }
 export interface ButtonText {
   text?: string;
@@ -24,14 +26,14 @@ export function Input(props: InputText) {
                 placeholder={props.text}
                 autoComplete='off'
                 className={`
-                    w-full
+                    ${props.baseClass ?? "w-full"}
                     2xl:h-13
                     2xl:pl-3
-                    2xl:pr-9
+                    ${props.baseClass ?? "2xl:pr-9"}
                     2xl:py-4
                     h-12
                     pl-3
-                    pr-9
+                    ${props.baseClass ?? "pr-9"}
                     text-[1em]
                     xl:text-[.9em]
                     border-2
@@ -59,7 +61,7 @@ export function Input(props: InputText) {
 
 export function Button(props: ButtonText) {
     return (
-        <button className="w-full h-12 2xl:h-13 bg-[var(--form-bg)] rounded-md text-[var(--background))] font-sans font-bold first-letter:uppercase hover:bg-[#1f605a] transition-bg duration-800">
+        <button className={buttonClass}>
             {props.text}
         </button>
     )

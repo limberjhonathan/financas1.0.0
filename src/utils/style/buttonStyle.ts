@@ -1,0 +1,1 @@
+export const buttonClass = "h-12 2xl:h-13 bg-[var(--form-bg)] rounded-md text-[var(--background))] font-sans font-bold first-letter:uppercase hover:bg-[#1f605a] transition-bg duration-800"

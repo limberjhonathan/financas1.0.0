@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ButtonLink } from "../components/button-link";
+import { ButtonLink } from "../components/buttonLinkHome";
 import { auth } from "@/auth";
 export async function Hero() {
   const session = await auth();

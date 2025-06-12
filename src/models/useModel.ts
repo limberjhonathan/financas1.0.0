@@ -1,3 +1,5 @@
+"use server";
+
 import db from "../lib/db";
 
 export async function findUserByEmail(email: string) {
@@ -25,7 +27,6 @@ export async function createUser(data: {
   });
 }
 
-
 export async function updateCodeUser(newCode: string, idExisting: number) {
   return await db.confirmationCode.update({
     where: {
@@ -36,5 +37,32 @@ export async function updateCodeUser(newCode: string, idExisting: number) {
       createdAt: new Date(),
       expiresAt: new Date(Date.now() + 3 * 60 * 1000), 
     },
+  });
+}
+
+export async function checkCode(code: string, email: string) {
+  console.log("Código recebido:", code);
+  console.log("Email recebido:", email);
+
+  const found = await db.confirmationCode.findFirst({
+    where: {
+      code,
+      user: {
+        email,
+      },
+      expiresAt: {
+        gte: new Date(),
+      },
+    },
+  });
+
+  console.log("Resultado da busca:", found);
+  return found;
+}
+
+export async function emailValidation(email: string) {
+  return  await db.user.update({
+    where: { email },
+    data: { isConfirmed: true },
   });
 }

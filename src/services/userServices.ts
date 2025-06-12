@@ -1,7 +1,9 @@
+"use server";
+
 import { compareSync } from "bcryptjs";
 import db from "../lib/db";
 import { generateCode } from "../utils/generateCode";
-import { updateCodeUser } from "../models/useModel";
+import { checkCode, emailValidation, updateCodeUser } from "../models/useModel";
 
 type User = {
     email: string;
@@ -59,6 +61,17 @@ export async function checkDateNow(
     return await updateCodeUser(newCode, id);
     
   }
+}
+
+export async function codeComparation(code: string, email: string) {
+  const found = await checkCode(code, email)
+  console.log("Código encontrado:", found);
+  if (found) {
+    await emailValidation(email)
+    return null;
+  }
+
+  return found;
 }
 
 // export default async function createNewCode(email: string){

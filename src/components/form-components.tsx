@@ -8,15 +8,30 @@ export interface InputText {
     type?: string;
     name?: string;
     error?: boolean;
+    maxLength?: number;
     baseClass?: string;
+    onChange?: (value: string) => string;
 }
 export interface ButtonText {
-  text?: string;
+    text?: string;
 }
 
 export function Input(props: InputText) {
     const [showPassword, setShowPassword] = useState(false)
     const isPassword = props.type === 'password'
+    const [value, setValue] = useState("");
+    
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = e.target.value;
+        let formatted = inputValue;
+
+        if (props.onChange) {
+            // Se passou onChange, usa ela para formatar
+            formatted = props.onChange(inputValue);
+        }
+
+        setValue(formatted);
+    };
 
     return (
         <div className='relative w-full'>
@@ -25,15 +40,16 @@ export function Input(props: InputText) {
                 name={props.name}
                 placeholder={props.text}
                 autoComplete='off'
+                value={value}
+                maxLength={props.maxLength}
+                onChange={handleChange}
                 className={`
-                    ${props.baseClass ?? "w-full"}
+                    ${props.baseClass ?? "w-full 2xl:pr-9 pr-9"}
                     2xl:h-13
                     2xl:pl-3
-                    ${props.baseClass ?? "2xl:pr-9"}
                     2xl:py-4
                     h-12
                     pl-3
-                    ${props.baseClass ?? "pr-9"}
                     text-[1em]
                     xl:text-[.9em]
                     border-2

@@ -1,18 +1,25 @@
 "use client";
-
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function TokenWatcher() {
-    const router = useRouter();
-    
-    useEffect(() => {
-        console.log("Olha o TokenWatcher rodando");
-        const interval = setInterval(() => {
-            router.refresh();
-        }, 100000); // 100000 ms = 100 seconds
+export interface Exp {
+    exp: number;
+}
 
-        return () => clearInterval(interval);
-    }, [router]);
-    return null
+export default function TokenWatcher({ exp }: Exp) {
+    // const expe = exp
+    // console.log("Token expira em:", new Date(expe * 1000).toLocaleString());
+    useEffect(() => {
+        const now = Date.now();
+        const expMs = exp * 1000; // Convertendo exp de segundos para ms
+        const delay = expMs - now; // Tempo restante até expirar
+        console.log("Delay (ms):", delay);
+        
+        const timeout = setTimeout(() => {
+            window.location.reload();
+        }, delay);
+
+        return () => clearTimeout(timeout);
+    }, [exp]);
+
+    return null;
 }

@@ -9,9 +9,10 @@ interface LayoutBackFormProps {
 export function LayoutBackForm({ children }: LayoutBackFormProps) { 
     return(
         <div className="bg-[var(--background)] min-h-[100dvh] text-white flex flex-col items-center justify-between p-2">
+            {/* usar o component se o token existe para redirecionar automaticamente se o login foi bem sucedido*/}
             <div className="flex flex-col items-center gap-3 2xl:gap-8 2xl:mt-20 2xl:text-[1em] text-[.8em] ">
                 <Link href={'/'}>
-                    <Image src="/background/bg-altus.png" alt="Background Altus" width={150} height={150} />
+                    <Image src="/background/bg-altus.png" alt="Background Altus" width={150} height={150} priority />
                 </Link>
                 {children}
             </div>

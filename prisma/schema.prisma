@@ -9,9 +9,21 @@ datasource db {
 }
 
 model user {
-  id        Int      @id @default(autoincrement())
-  username  String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
+  id                Int               @id @default(autoincrement())
+  username          String
+  email             String            @unique
+  password          String
+  isConfirmed       Boolean           @default(false)
+  createdAt         DateTime          @default(now())
+  confirmationCode  confirmationCode? @relation("UserToCode")
 }
+
+model confirmationCode {
+  id        Int      @id @default(autoincrement())
+  code      String
+  userId    Int      @unique
+  user      user     @relation("UserToCode", fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+

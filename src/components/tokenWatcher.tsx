@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 
-export interface Exp {
+interface Exp {
     exp: number;
 }
 

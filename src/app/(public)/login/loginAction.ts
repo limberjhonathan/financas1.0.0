@@ -20,9 +20,10 @@ export default async function loginAction(_prevState: any, formData: FormData) {
         await signIn("credentials", {
             email,
             password,
-            redirect: true,
-            redirectTo: "/dashboard",
+            redirect: false,
+            // redirectTo: "/dashboard",
         });
+        return { success: true, message: "Login realizado com sucesso" };
     }
     catch (e: any) {
         const email = formData.get("email") as string
@@ -38,7 +39,7 @@ export default async function loginAction(_prevState: any, formData: FormData) {
                 name: "email_not_confirmed",
                 value: generateEmailToken(email),
                 path: "/",
-                maxAge: 60 * 3,
+                maxAge: 60,
                 httpOnly: true,
                 sameSite: "lax",
                 secure: process.env.NODE_ENV === "production",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export interface Titulo {
+interface Titulo {
     text: string
 }
 

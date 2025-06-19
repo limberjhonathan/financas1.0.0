@@ -6,13 +6,11 @@ interface Exp {
 }
 
 export default function TokenWatcher({ exp }: Exp) {
-    // const expe = exp
-    // console.log("Token expira em:", new Date(expe * 1000).toLocaleString());
     useEffect(() => {
         const now = Date.now();
         const expMs = exp * 1000; // Convertendo exp de segundos para ms
         const delay = expMs - now; // Tempo restante até expirar
-        console.log("Delay (ms):", delay);
+        // console.log("Delay (minutos):", delay / 1000 / 60);
         
         const timeout = setTimeout(() => {
             window.location.reload();

@@ -2,8 +2,9 @@
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { useState } from 'react'
 import { buttonClass } from '../utils/style/buttonStyle';
+import { getSession } from 'next-auth/react';
 
-export interface InputText {
+interface InputText {
     text?: string;
     type?: string;
     name?: string;
@@ -12,7 +13,7 @@ export interface InputText {
     baseClass?: string;
     onChange?: (value: string) => string;
 }
-export interface ButtonText {
+interface ButtonText {
     text?: string;
 }
 
@@ -20,13 +21,12 @@ export function Input(props: InputText) {
     const [showPassword, setShowPassword] = useState(false)
     const isPassword = props.type === 'password'
     const [value, setValue] = useState("");
-    
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
         let formatted = inputValue;
 
         if (props.onChange) {
-            // Se passou onChange, usa ela para formatar
             formatted = props.onChange(inputValue);
         }
 
@@ -76,9 +76,16 @@ export function Input(props: InputText) {
 }
 
 export function Button(props: ButtonText) {
-    return (
-        <button className={buttonClass}>
-            {props.text}
-        </button>
-    )
+  const handleClick = async () => {
+    const session = await getSession();
+    if (session) {
+      window.location.reload();
+    }
+  };
+
+  return (
+    <button className={buttonClass} onClick={handleClick}>
+      {props.text}
+    </button>
+  );
 }

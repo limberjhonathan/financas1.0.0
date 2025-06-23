@@ -7,11 +7,9 @@ import Notification from '@/src/components/notification';
 import { Button, Input } from '@/src/components/form-components';
 import FormContainer from '@/src/components/FormContainer';
 
-
 export default function RegisterForm() {
     const [state, formAction, isPending] = useActionState(registerAction, null);
     const { showNotification } = useNotification(state);
-
 
     const errorFields = getErrorFields(state?.typeError);
     return (

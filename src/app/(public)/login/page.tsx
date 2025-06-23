@@ -7,13 +7,13 @@ import LoginForm from "./login-form";
 
 export const metadata = generatePageMetadata("Login", "Login page");
 
-export default async function Login() {
+export default function Login() {
 
   return (
     <LayoutBackForm>
       <div>
         <TitleForm>Login</TitleForm>
-        <LoginForm />
+        <LoginForm/>
         <p className="text-center p-2">
           Ainda não possui conta?{" "}
           <Link

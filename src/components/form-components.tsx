@@ -76,16 +76,20 @@ export function Input(props: InputText) {
 }
 
 export function Button(props: ButtonText) {
-  const handleClick = async () => {
-    const session = await getSession();
-    if (session) {
-      window.location.reload();
-    }
-  };
+    const handleClick = async () => {
+        const verificarAtivo = localStorage.getItem("verificarAtivo");
+        const session = await getSession();
+        if (verificarAtivo === "true") {
+            window.location.reload();
+        }
+        if (session) {
+            window.location.reload();
+        }
+    };
 
-  return (
-    <button className={buttonClass} onClick={handleClick}>
-      {props.text}
-    </button>
-  );
+    return (
+        <button className={buttonClass} onClick={handleClick}>
+            {props.text}
+        </button>
+    );
 }

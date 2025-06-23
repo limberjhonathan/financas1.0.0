@@ -41,8 +41,6 @@ export async function updateCodeUser(newCode: string, idExisting: number) {
 }
 
 export async function checkCode(code: string, email: string) {
-  console.log("Código recebido:", code);
-  console.log("Email recebido:", email);
 
   const found = await db.confirmationCode.findFirst({
     where: {
@@ -55,8 +53,6 @@ export async function checkCode(code: string, email: string) {
       },
     },
   });
-
-  console.log("Resultado da busca:", found);
   return found;
 }
 

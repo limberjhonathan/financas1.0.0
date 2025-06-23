@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { buttonClass } from "../utils/style/buttonStyle";
 
 interface ButtonActionProps {
@@ -10,13 +9,6 @@ interface ButtonActionProps {
 }
 
 export default function ButtonAction(props: ButtonActionProps) {
-  const [hasVerified, setHasVerified] = useState(false);
-
-  useEffect(() => {
-    const verified = localStorage.getItem("verificarAtivo");
-    setHasVerified(!!verified);
-  }, []);
-
   const disabledStyle = props.disabled ? "opacity-50 cursor-not-allowed" : "";
 
   return (
@@ -24,11 +16,14 @@ export default function ButtonAction(props: ButtonActionProps) {
       type={props.type}
       disabled={props.disabled}
       onClick={() => {
-        if (hasVerified) {
-          window.location.reload();
-        } else {
-          props.onClick?.();
+        if (typeof window !== "undefined") {
+          const hasVerified = localStorage.getItem("verificarAtivo");
+          if (hasVerified) {
+            props.onClick?.();
+            return;
+          }
         }
+        window.location.reload();
       }}
       className={`${buttonClass} ${props.baseClass ?? ""} ${disabledStyle}`}
     >

@@ -39,14 +39,13 @@ export default async function loginAction(_prevState: any, formData: FormData) {
                 name: "email_not_confirmed",
                 value: generateEmailToken(email),
                 path: "/",
-                maxAge: 60,
+                maxAge: 60 * 30,
                 httpOnly: true,
                 sameSite: "lax",
                 secure: process.env.NODE_ENV === "production",
             });
             // Enviar o email
             // await sendVerificationEmail(email, code);
-
             redirect("/verificar");
         }
 

@@ -16,7 +16,6 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (state?.success) {
-      // router.push("/dashboard");
       window.location.reload();
     }
   }, [state, router]);
@@ -29,7 +28,7 @@ export default function LoginForm() {
       <FormContainer form={formAction}>
         <Input text="E-mail ou usuário" type="text" name="email" error={hasError} />
         <Input text="Senha" type="password" name="password" error={hasError} />
-        <Button text={isPending ? "Acessando" : "acessar"} />
+        <Button text={isPending ? "Acessando" : "acessar"}/>
       </FormContainer>
     </>
   );

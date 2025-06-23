@@ -11,7 +11,7 @@ export async function sendVerificationEmail(to: string, code: string){
     },
   });
 
-  const info = await transporter.sendMail({
+  await transporter.sendMail({
     from: `"Seu App" <${process.env.EMAIL_USER}>`,
     to,
     subject: "Confirme seu email",
@@ -19,7 +19,4 @@ export async function sendVerificationEmail(to: string, code: string){
     html: `<p>Seu código de verificação é: <strong>${code}</strong></p>`,
   });
 
-  const email = info.response
-
-  console.log("Email: ", email);
 }

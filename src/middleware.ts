@@ -9,6 +9,10 @@ export default async function middleware(req: NextRequest) {
   const { pathname } = url;
   const emailCookie = req.cookies.get("email_not_confirmed");
 
+  if (pathname.startsWith("/api")) {
+    return NextResponse.next(); // ⚠️ Libera todas as rotas da API
+  }
+
   // 🔒 Se o cookie existe e NÃO está em /verificar → redireciona
   if (emailCookie && pathname !== "/verificar") {
     return NextResponse.redirect(new URL("/verificar", req.url));

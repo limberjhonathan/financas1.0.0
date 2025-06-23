@@ -14,6 +14,5 @@ export default async function getEmailFromToken() {
 
     const email = "email" in payload ? payload.email : "";
     const exp = "exp" in payload ? payload.exp : null;
-
     return { email, exp };
 }

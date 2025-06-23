@@ -65,7 +65,6 @@ export async function checkDateNow(
 
 export async function codeComparation(code: string, email: string) {
   const found = await checkCode(code, email)
-  console.log("Código encontrado:", found);
   if (found) {
     await emailValidation(email)
     return null;

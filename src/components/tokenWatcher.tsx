@@ -13,6 +13,7 @@ export default function TokenWatcher({ exp }: Exp) {
         // console.log("Delay (minutos):", delay / 1000 / 60);
         
         const timeout = setTimeout(() => {
+            localStorage.removeItem("verificarAtivo");
             window.location.reload();
         }, delay);
 
